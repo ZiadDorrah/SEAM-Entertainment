@@ -1,12 +1,19 @@
 
 
-const liItem = document.querySelectorAll('ul li');
+const liItem = document.querySelectorAll('ul#gallery-filters li');
 const imgItem = document.querySelectorAll('.gallery-container .col-lg-3 ');
 const pItem = document.querySelectorAll('.gallery-container .col-lg-3 .gallery-item p');
+
+let form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
 
 liItem.forEach(li => {
     li.onclick = function(){
+
+      console.log('A')
         // active
         liItem.forEach(li =>{
             li.className = "filter";

@@ -22,64 +22,81 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="src/css/Dorrah.css" />
+    <link rel="stylesheet" href="src/css/main.css" />
     
     <title>Test</title>
   </head>
   <body>
-<header>
-<div class="container">
-
-
-  
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent mb-3">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="src/image/WHITE VERSION TRANSPARENT.png" alt="" srcset=""></a>
-
-        
-
-          <ul class="navbar-nav d-flex mb-2 mb-lg-0">
-
+  <header id="header">
+    <nav class="navbar navbar-expand-md navbar-dark mb-3">
+      <div class="container">
+        <div class="nav-detail">
+          <a class="navbar-brand" href="#header" >
+            <img src="/src/image/HI RESOLUTION.png" width="120px" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" >Home</a>
+              <a class="nav-link active" aria-current="page" href="#header" >Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-5" href="#gallery" >Gallery</a>
+              <a class="nav-link" href="#gallery" >Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  mx-5" href="#cast"  >Cast</a>
+              <a class="nav-link" href="#cast" >Cast</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  mx-5" href="#faq"  >FAQ</a>
+              <a class="nav-link" href="#faq" >FAQ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  mx-5" href=""  >Blog</a>
+              <a class="nav-link" href="https://www.google.com" >Blog</a>
             </li>
-            <li class="nav-item">
-              <a class="btn btn-info  mx-5 " href=""> win a free copy of the game </a>
-            </li>
-
           </ul>
-        
+        </div>
       </div>
     </nav>
-  </div>
-  <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, iusto.</p>
-
-  </header>
-<!-- 
-  <section class="splide" aria-label="Splide Basic HTML Example">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide">Slide 01</li>
-        <li class="splide__slide">Slide 02</li>
-        <li class="splide__slide">Slide 03</li>
-      </ul>
+    <div class="header-content">
+      <div class="button-container">
+        <a href="#register" class="button register button--small btn-primary"  id="submit" >Win a free copy game</a>
+      </div>
     </div>
-  </section> -->
-    <div class="container">
-
-      
+    <ul class="soical-media ">
+      <li class="nav-item">
+        <a
+          aria-current="page"
+          href="https://www.facebook.com"
+          ><i class="fa-brands fa-facebook"></i
+        ></a>
+      </li>
+      <li class="nav-item d-flex">
+        <a
+          aria-current="page"
+          href="https://www.discord.com"
+          ><i class="fa-brands fa-discord"></i
+        ></a>
+      </li>
+      <li class="nav-item">
+        <a
+          aria-current="page"
+          href="https://www.twitter.com"
+          ><i class="fa-brands fa-twitter"></i
+        ></a>
+      </li>
+      <li class="nav-item">
+        <a
+          aria-current="page"
+          href="https://www.tiktok.com"
+          ><i class="fa-brands fa-tiktok"></i
+        ></a>
+      </li>
+    </ul>
+    
+  </header>
+  <div class="container">
 
       <section id="gallery" class="gallery-section">
         <div class="container">
@@ -258,18 +275,13 @@
                       <input type="submit" class="button register button--small button--green" value="Register" id="submit"/>
                     </div>
                   </div>
- 
-
                 </div>
-               
-
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-
 
     <section id="faq" class="faq-section">
       <div class="container">
@@ -305,7 +317,7 @@
               <h4 class="panel-title">
                 <a
                 data-toggle="collapse"
-                data-parent="#accordion2"
+                data-parent="#accordion"
                 href="#collapse2"
                 >
                 <h3 class="faq-header text-dark">02 What will the mint price be?</h3></a
@@ -354,21 +366,7 @@
     <section class="">
         <div class="container text-center text-md-start mt-5">
                 <div class="row mt-3">
-            
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-5">
-                    <h4 class="text-uppercase fw-bold mb-5">
-                <i class="fas fa-gem me-3"></i>lorem
-            </h4>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium, ullam?
-            </p>
-            </div>
-            
-
-            
-
-            
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-5">
+            <div class="col-12 ">
                     <h4 class="text-uppercase fw-bold mb-5">Contact</h4>
             <p><i class="fas fa-home me-3"></i>  11 West Town, PBo 12345, United States</p>
             <p>
@@ -386,11 +384,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-            
-          <p class=" p-5" >
-            © 2023 Copyright: - Designed by 3Mz.
-            
-          </p>
+
+          <p>© 2023 SAMUEL SAGE. All rights reserved.</p>
         </div>
       
 
@@ -416,7 +411,6 @@
 </footer>
 
     <script src="src/slider/owl.carousel.min.js" ></script>
-    <script src="src/js/Dorrah.js"></script>
     <script src="src/js/bootstrap.bundle.min.js"></script>
     <script src="src/js/all.min.js"></script>
     <script src="src/js/main.js"></script>
