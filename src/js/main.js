@@ -1,3 +1,5 @@
+
+
 const liItem = document.querySelectorAll('ul li');
 const imgItem = document.querySelectorAll('.gallery-container .col-lg-3 ');
 const pItem = document.querySelectorAll('.gallery-container .col-lg-3 .gallery-item p');

@@ -10,10 +10,8 @@
   margin: 0;
   font-family: 'Robot',sans-serif !important;
 }
-body {
-  background-color: var(--background-color);
-  /* color: var(--main-color); */
-}
+
+
 section{
   padding: 80px 0px;
 }
