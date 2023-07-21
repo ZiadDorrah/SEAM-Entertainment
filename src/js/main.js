@@ -6,7 +6,7 @@
 		speed: 1000,
 		autoplay: true,
 		parallax: true,
-		loop: true,
+		loop: false,
 		on: {
 			init: function () {
 				var swiper = this;
@@ -22,11 +22,11 @@
 				this.update();
 			},
 		},
-		pagination: {
-			el: ".slider-prlx .parallax-slider .swiper-pagination",
-			dynamicBullets: true,
-			clickable: true,
-		},
+		// pagination: {
+		// 	el: ".slider-prlx .parallax-slider .swiper-pagination",
+		// 	dynamicBullets: true,
+		// 	clickable: true,
+		// },
 		navigation: {
 			nextEl: ".slider-prlx .parallax-slider .next-ctrl",
 			prevEl: ".slider-prlx .parallax-slider .prev-ctrl",
