@@ -113,7 +113,7 @@ button:focus {
     padding: 9px 35px;
     text-align: center;
     font-size: 15px;
-    text-transform: capitalize;
+    text-transform: none;
     letter-spacing: 0px;
     font-weight: 400;
     border: 2px solid #ffffff;
@@ -1452,7 +1452,7 @@ h5 {
     padding: 8px 15px;
     text-align: center;
     font-size: 18px;
-    text-transform: capitalize;
+    text-transform: none;
     letter-spacing: 0px;
     font-weight: 400;
     border: 0;
@@ -1749,7 +1749,7 @@ header .links .soical-media li a:hover {
  * Shop Now Section Style
  *************************************/
 .cast-area {
-    background: url(../images/section-bg.jpg);
+    /*background: url(../images/section-bg.jpg);*/
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2279,7 +2279,7 @@ hr {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url(../images/section-bg.jpg);
+    /*background-image: url(../images/section-bg.jpg);*/
     z-index: 1;
     text-align: center;
     position: relative;
@@ -2464,6 +2464,7 @@ hr {
     overflow: hidden;
     border-radius: 3px;
     margin-top: 30px;
+
 }
 
 .gallery-item .gallery-img-overlay {
@@ -2559,9 +2560,6 @@ hr {
     transition-delay: 0.3s;
 }
 
-.gallery-item img {
-    height: 200px !important;
-}
 
 .gallery-more-btn {
     margin-top: 30px;
@@ -2759,7 +2757,7 @@ textarea:focus {
  * FAQ Section Style
  *************************************/
 .faq-area {
-    background: url(../images/section-bg.jpg);
+    /*background: url(../images/section-bg.jpg);*/
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2825,7 +2823,7 @@ label {
 --------------------------------------------------------------*/
 .footer-section {
     position: relative;
-    background: url(../images/section-bg.jpg) center center;
+    /*background: url(../images/section-bg.jpg) center center;*/
     background-size: cover;
     border-radius: 0px;
     overflow: hidden;
@@ -3138,9 +3136,13 @@ label {
         margin-bottom: 30px;
     }
 
-    .form-container-box {
+    /* .form-container-box {
         padding: 25px 15px;
         margin-top: 30px;
+    } */
+
+    .register-img {
+        display: none;
     }
 
     .footer-area {
@@ -3308,8 +3310,8 @@ label {
     }
 
     .form-container-box {
-        padding: 25px 15px;
-        margin-top: 30px;
+        /* padding: 25px 15px;
+        margin-top: 30px; */
     }
 
     .footer-area {
@@ -3375,8 +3377,8 @@ label {
     }
 
     .form-container-box {
-        padding: 25px 15px;
-        margin-top: 30px;
+        /* padding: 25px 15px;
+        margin-top: 30px; */
     }
 
     .footer-area {

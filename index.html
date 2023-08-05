@@ -5,20 +5,28 @@
   <meta charset="utf-8" />
   <title>SEAM Entertainment</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta name="keywords" content="SEAM Entertainment" />
-  <meta name="description" content="SEAM Entertainment" />
+  <meta name="keywords" content="SEAM Entertainment visual novel game developer publisher united kingdom milton keynes studio" />
+  <meta name="description" content="SEAM Entertainment is a game developer and publisher based in Milton Keynes (U.K)." />
+
+  <meta property="og:site_name" content="Seam Entertainment." />
+  <meta property="og:title" content="Seam Entertainment." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.seamentertainment.com" />
+  <meta property="og:image" content="./src/image/og-thumbnail-generic.png" />
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="src/image/ICON LOGO TRANSPARENT.png" />
+  <link rel="icon" type="image/png" href="./src/image/icon.png" />
+  <link rel="apple-touch-icon" href="./src/image/icon.png" />
   <!-- Site All Style Sheet Css -->
-  <link href="src/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="src/css/swiper.min.css" rel="stylesheet" />
-  <link href="src/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="src/css/owl.carousel.min.css" rel="stylesheet" />
-  <link href="src/css/owl.theme.default.min.css" rel="stylesheet" />
-  <link href="src/css/animate.min.css" rel="stylesheet" />
-  <link href="src/css/magnific-popup.css" rel="stylesheet" />
+  <link href="./src/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="./src/css/swiper.min.css" rel="stylesheet" />
+  <link href="./src/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="./src/css/owl.carousel.min.css" rel="stylesheet" />
+  <link href="./src/css/owl.theme.default.min.css" rel="stylesheet" />
+  <link href="./src/css/animate.min.css" rel="stylesheet" />
+  <link href="./src/css/magnific-popup.css" rel="stylesheet" />
   <!-- Site Main Style Sheet Css -->
-  <link href="src/css/style.css" rel="stylesheet" />
+  <link href="./src/css/style.css" rel="stylesheet" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +35,138 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital@1&display=swap" rel="stylesheet">
+
+
+
+  <script>
+
+    // something to html encode something
+    function escapeHtml(text) {
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '*': '&#042;',
+            '=': '&#061;',
+            '"': '&quot;',
+            ';': '&#59;',
+            "'": '&#039;'
+        };
+
+        return text.replace(/[&*=<>"']/g, function(m) { return map[m]; });
+    };
+
+
+    // something to reset the error fields..
+    resetAllErrorFields = function() {
+      document.getElementById("formFieldError_uname").style.display = 'none';
+      document.getElementById("formFieldError_email").style.display = 'none';
+    };
+
+    // something to reset the entire forms
+    resetForm = function() {
+      resetAllErrorFields();
+      document.getElementById("uname").value = "";
+      document.getElementById("email").value = "";
+    };
+
+    // scrolls smoothly to an element
+    smoothScroll = function (target) {
+      var my_element = document.getElementById(target);
+      my_element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    };
+
+    // function to validate email
+    validateEmail = function(testString) {
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      return testString.match(regex) == null ? false : true;
+    };
+
+    // handle form submission
+    submitEnquiry = function() {
+
+      resetAllErrorFields();
+
+      var uname = document.getElementById("uname").value.trim();
+      var email  = document.getElementById("email").value.trim();
+      var ageVerification =  document.getElementById("age-declaration").checked;
+      var marketingConsent =  document.getElementById("marketing-consent").checked;
+
+      var formValidated = true;
+
+      if (uname.length == 0) {
+        document.getElementById("formFieldError_uname").innerText  = "This field is required.";
+        document.getElementById("formFieldError_uname").style.display = 'block';
+        formValidated = false;
+      }
+
+      if (email.length == 0) {
+        document.getElementById("formFieldError_email").innerText  = "This field is required.";
+        document.getElementById("formFieldError_email").style.display = 'block';
+        formValidated = false;
+      }
+
+      if (validateEmail(email) == false) {
+        document.getElementById("formFieldError_email").innerText  = "Invalid email address.";
+        document.getElementById("formFieldError_email").style.display = 'block';
+        formValidated = false;
+      }
+
+      if (formValidated == true) {
+        /*
+        var url = "https://www.seamentertainment.com/register";
+        $.post(url,
+          {
+            enquiryBy: uname,
+            replyTo: email,
+            isOldEnough:ageVerification,
+            wantsJuice:marketingConsent
+          },
+          function(data, status, jqXHR){
+            const parsedResponse = JSON.parse(data);
+            alert(parsedResponse.status);
+            resetForm();
+        });
+        */
+
+        uname = escapeHtml(uname);
+        email = escapeHtml(email);
+        var url = "https://www.seamentertainment.com:7513/register";
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange  = function() {
+            if(this.readyState == 4) {
+              if (this.status == 200) {
+
+                var responseJSON = JSON.parse(this.responseText);
+                var message = responseJSON.message;
+                alert(message);
+              } 
+            }
+          }
+          
+          xhttp.open("POST", url, true);
+          xhttp.setRequestHeader("accept", "application/json");
+          xhttp.setRequestHeader("content-type", "application/json");
+          var data = '{"name": uname, "email": email, "ageConsent" : ageVerification, "marketingConsent" : marketingConsent}';
+          xhttp.send(data);
+
+          return false;
+      }
+
+    }
+
+    // reset all form fields.
+    window.addEventListener("load", function(){
+      resetForm();
+    });
+
+  </script>
+
 </head>
 
 <body>
@@ -35,7 +175,7 @@
     <div class="preloader-wapper">
       <div>
         <div class="spinner-loader spinner-border" role="status">
-          <img class="spinner-logo" src="src/image/ICON LOGO TRANSPARENT.png" alt="laoder" />
+          <img class="spinner-logo" src="./src/image/preloader.png" alt="laoder" />
         </div>
       </div>
     </div>
@@ -47,9 +187,9 @@
     <nav class="navbar navbar-b navbar-trans navbar-expand-lg" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll" href="index.html">
-          <img src="src/Image/HI-RESOLUTION.png" style="transform: none; transition: none;" class="white-logo"
+          <img src="./src/image/logo_821x222.png" style="transform: none; transition: none;" class="white-logo"
             alt="logo" />
-          <img src="src/Image/HI-RESOLUTION.png" style="transform: none; transition: none;" class="black-logo"
+          <img src="./src/image/logo_821x222.png" style="transform: none; transition: none;" class="black-logo"
             alt="logo" />
         </a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
@@ -71,9 +211,9 @@
               <a class="nav-link js-scroll" href="#faq">FAQ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll" href="https://google.com" target="_blank">Blog</a>
+              <a class="nav-link js-scroll" href="https://www.tumblr.com/seamentertainment" target="_blank">Blog</a>
             </li>
-            <li class="nav-item book-now"><a class="nav-link js-scroll" href="#register">Win a free copy game</a>
+            <li class="nav-item book-now"><a class="nav-link js-scroll" href="#register">Win a free copy</a>
             </li>
           </ul>
         </div>
@@ -87,16 +227,16 @@
     <div class="swiper-container parallax-slider">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <div class="bg-img valign" data-background="src/Image/banner_background.png" data-overlay-dark="6">
+          <div class="bg-img valign" data-background="./src/image/banner_background.png" data-overlay-dark="6">
             <div class="container p-0">
               <div class="row">
                 <div class="col-lg-12 col-md-12">
                   <div class="caption text-center">
                     <h1> SAMUEL SAGE</h1>
-                    <h2> The Mystery At Penvy Inn</h2>
-                    <p>A kinetic visual. Expected release February 2024</p>
+                    <h2> The Mystery at Penby Inn</h2>
+                    <p>A kinetic visual novel. Expected release February 2024</p>
                     <div class="home-button-box home-slider-btn">
-                      <a href="#register" class="button home-btn js-scroll">Win a free copy game</a>
+                      <a href="#register" class="button home-btn js-scroll">Win a free copy</a>
                     </div>
                   </div>
                 </div>
@@ -109,19 +249,19 @@
       <div class="links">
         <ul class="soical-media ">
           <li class="nav-item">
-            <a aria-current="page" target="_blank" href="https://www.facebook.com"><i
+            <a aria-current="page" target="_blank" href="https://www.facebook.com/profile.php?id=100093550213546"><i
                 class="fa-brands fa-facebook"></i></a>
           </li>
           <li class="nav-item d-flex">
-            <a aria-current="page" target="_blank" href="https://www.discord.com"><i
+            <a aria-current="page" target="_blank" href="https://discord.com/channels/1091056340413206538/1091056992229011667"><i
                 class="fa-brands fa-discord"></i></a>
           </li>
           <li class="nav-item">
-            <a aria-current="page" target="_blank" href="https://www.twitter.com"><i
+            <a aria-current="page" target="_blank" href="https://twitter.com/seamentertain"><i
                 class="fa-brands fa-twitter"></i></a>
           </li>
           <li class="nav-item">
-            <a aria-current="page" target="_blank" href="https://www.tiktok.com"><i class="fa-brands fa-tiktok"></i></a>
+            <a aria-current="page" target="_blank" href="https://www.tiktok.com/@seamentertainmentuk"><i class="fa-brands fa-tiktok"></i></a>
           </li>
         </ul>
       </div>
@@ -137,7 +277,7 @@
       <div class="row">
         <div class="col-lg-12 col-md-12">
           <div class="section-title">
-            <h2>Our Gallery</h2>
+            <h2>Image Gallery</h2>
           </div>
         </div>
       </div>
@@ -146,105 +286,261 @@
           <div class="gallery-list">
             <ul class="nav" id="gallery-flters">
               <li class="filter filter-active" data-filter=".all">All</li>
-              <li class="filter" data-filter=".repairing">Repairing</li>
-              <li class="filter" data-filter=".carWash">Car Wash</li>
-              <li class="filter" data-filter=".paint">Paint</li>
-              <li class="filter" data-filter=".new">New</li>
+              <li class="filter" data-filter=".hotelexterior">Hotel Exterior</li>
+              <li class="filter" data-filter=".hotelreception">Hotel Reception &amp; Lobby</li>
+              <li class="filter" data-filter=".hotelmanagersoffice">Hotel Managers Office</li>
+              <li class="filter" data-filter=".samsageresidence">Samuel Sage&apos;s residence</li>
+              <li class="filter" data-filter=".panoramicimage">Panoramic Images</li>
             </ul>
           </div>
         </div>
         <div class="gallery-container">
+
+          <!-- sam sage residence -->
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash new">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence panoramicimage">
             <div class="gallery-item">
-              <img src="src/Image/1.png" alt="image" />
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_panoramic.jpg" alt="Explore a 360-degree panorama of Sam Sage's living room." />
+              <a href="./panoviewer.html?imid=a2c13e91-1e46-49d2-aee0-582770a7ed3a&autospin=1">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- gallery-item -->
+          <!-- 
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_1.jpg" alt="Picture of Samuel Sage's living room 1" />
               <div class="gallery-img-overlay">
                 <div class="gallery-content">
-                  <a href="src/Image/1.png" class="popimg">
+                  <a href="./src/image/gallery/sam_sage_residence/sam_sage_livingroom_1.jpg" class="popimg">
                     <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
+          -->
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash repairing">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence">
             <div class="gallery-item">
-              <img src="src/Image/2.png" alt="image" />
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_1.jpg" alt="Picture of Samuel Sage's living room #1." />
+              <a href="./src/image/gallery/sam_sage_residence/sam_sage_livingroom_1.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/2.png" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
             </div>
           </div>
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash new">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence">
             <div class="gallery-item">
-              <img src="src/Image/3.png" alt="image" />
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_2.jpg" alt="Picture of Samuel Sage's living room #2." />
+              <a href="./src/image/gallery/sam_sage_residence/sam_sage_livingroom_2.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/3.png" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
             </div>
           </div>
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash webdesig repairingn">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence">
             <div class="gallery-item">
-              <img src="src/Image/4.png" alt="image" />
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_3.jpg" alt="Picture of Samuel Sage's living room #3." />
+              <a href="./src/image/gallery/sam_sage_residence/sam_sage_livingroom_3.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/4.png" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
+            </div>
+          </div>          
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all samsageresidence">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/sam_sage_residence/thumbs/sam_sage_livingroom_4.jpg" alt="Picture of Samuel Sage's living room #4." />
+              <a href="./src/image/gallery/sam_sage_residence/sam_sage_livingroom_4.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- hotel exterior-->
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelexterior">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_exterior/thumbs/shot_cam3_render17.jpg" alt="Picture of the exterior of the Penby Inn." />
+              <a href="./src/image/gallery/hotel_exterior/shot_cam3_render17.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- hotel managers office -->
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice panoramicimage">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/harris_office_panoramic.jpg" alt="Explore a 360-degree panorama of the hotel managers office." />
+              <a href="./panoviewer.html?imid=ffaede76-4827-447d-8fbd-ba92d2d88f9c&autospin=1">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
             </div>
           </div>
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash new repairing">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
             <div class="gallery-item">
-              <img src="src/Image/cartoon-character-with-fashion-bag-min.jpg" alt="image" />
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/harris_office_lighting_test_b1.jpg" alt="Photo of the managers office #1." />
+              <a href="./src/image/gallery/hotel_manager_office/harris_office_lighting_test_b1.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/cartoon-character-with-fashion-bag-min.jpg" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
             </div>
-          </div>
+          </div>  
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash new paint">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
             <div class="gallery-item">
-              <img src="src/Image/1.png" alt="image" />
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/harris_office_lighting_test_c1.jpg" alt="Photo of the managers office #2." />
+              <a href="./src/image/gallery/hotel_manager_office/harris_office_lighting_test_c1.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/1.png" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
             </div>
-          </div>
+          </div>  
+
           <!-- gallery-item -->
-          <div class="col-lg-4 col-md-6 gallery-grid-item all carWash new paint">
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
             <div class="gallery-item">
-              <img src="src/Image/1.png" alt="image" />
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/harris_office_lighting_test_d1.jpg" alt="Photo of the managers office #3." />
+              <a href="./src/image/gallery/hotel_manager_office/harris_office_lighting_test_d1.jpg" class="popimg">
               <div class="gallery-img-overlay">
-                <div class="gallery-content">
-                  <a href="src/Image/1.png" class="popimg">
-                    <span class="icon">View image <i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                  </a>
-                </div>
               </div>
+              </a>
             </div>
-          </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/harris_office_lighting_test_e1.jpg" alt="Photo of the managers office #4." />
+              <a href="./src/image/gallery/hotel_manager_office/harris_office_lighting_test_e1.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/hybrid_shading1.jpg" alt="Books and small potted cactus plant shaded using hybrid toon shaders." />
+              <a href="./src/image/gallery/hotel_manager_office/hybrid_shading1.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/hybrid_shading2.jpg" alt="Pink potted flowering plant shaded using hybrid toon shaders." />
+              <a href="./src/image/gallery/hotel_manager_office/hybrid_shading2.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelmanagersoffice">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_manager_office/thumbs/photorealistic_vs_hybrid_look.jpg" alt="Comparing the results of photorealistic and toon shaders." />
+              <a href="./src/image/gallery/hotel_manager_office/photorealistic_vs_hybrid_look.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- hotel lobby and reception -->
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/interior_lobby_scene1_level+exposure.jpg" alt="Hotel lobby image #1." />
+              <a href="./src/image/gallery/hotel_reception/interior_lobby_scene1_level+exposure.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/interior_lobby_scene2.jpg" alt="Hotel lobby image #2." />
+              <a href="./src/image/gallery/hotel_reception/interior_lobby_scene2.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/persp_test1.jpg" alt="Phone on hotel reception desk." />
+              <a href="./src/image/gallery/hotel_reception/persp_test1.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/persp_test2.jpg" alt="Picture of the lobby from behind the reception desk." />
+              <a href="./src/image/gallery/hotel_reception/persp_test2.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/reception_bg_modified.jpg" alt="Picture of the reception desk." />
+              <a href="./src/image/gallery/hotel_reception/reception_bg_modified.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+          <!-- gallery-item -->
+          <div class="col-lg-4 col-md-6 gallery-grid-item all hotelreception">
+            <div class="gallery-item">
+              <img src="./src/image/gallery/hotel_reception/thumbs/shot_cam2_lobby_modified.jpg" alt="Wide-angle picture of the lobby." />
+              <a href="./src/image/gallery/hotel_reception/shot_cam2_lobby_modified.jpg" class="popimg">
+              <div class="gallery-img-overlay">
+              </div>
+              </a>
+            </div>
+          </div>  
+
+
+
         </div>
       </div>
     </div>
@@ -255,7 +551,7 @@
   <section id="cast" class="cast-area section-padding">
     <div class="container">
       <div class="section-title">
-        <h2>Our Cast</h2>
+        <h2>Meet The Cast</h2>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -264,12 +560,11 @@
             <div class="seam-theme-product-item">
               <div class="product-item-content">
                 <div class="product">
-                  <img class="product-image" src="src/Image/cartoon-character-with-fashion-bag-min.jpg" />
+                  <img class="product-image" src="./src/image/cast/sam_sage_casual_attire_2_special_pose_1_with_gradient_bg_500x500.png" />
                   <div class="product-description">
-                    <h1 class="product-title">Leather Stearing</h1>
+                    <h1 class="product-title">Samuel Sage</h1>
                     <p>
-                      Make your car beautifull with Leather stearing wheel
-                      cover
+                      Tech genius, entrepreneur, and now the reluctant owner of the Penby Inn! Will Samuel Sage be able to revive his uncle's failing legacy or is this more trouble than he bargained for?
                     </p>
                   </div>
                 </div>
@@ -279,48 +574,18 @@
             <div class="seam-theme-product-item">
               <div class="product-item-content">
                 <div class="product">
-                  <img class="product-image" src="src/Image/cartoon-character-with-handbag-sunglasses-min.jpg" />
+                  <img class="product-image" src="./src/image/cast/edward_sage_casual_attire1_special_pose_1_with_gradient_bg_500x500.png" />
                   <div class="product-description">
-                    <h1 class="product-title">Doors and Paint</h1>
+                    <h1 class="product-title">Edward Sage</h1>
                     <p>
-                      Order Any color paint for your doors or you can buy new
-                      doors
+                      Hotel owner, philanthropist and kind-hearted millionaire. Edward Sage has it made! But will the secrets from his past destroy the future of the one he holds most dear?
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- product item -->
-            <div class="seam-theme-product-item">
-              <div class="product-item-content">
-                <div class="product">
-                  <img class="product-image" src="src/Image/photo1689702877.jpeg" />
-                  <div class="product-description">
-                    <h1 class="product-title">Custom Interior</h1>
-                    <p>
-                      Order Leathar Custom Interior Designs for your cars any
-                      color
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- product item -->
-            <div class="seam-theme-product-item">
-              <div class="product-item-content">
-                <div class="product">
-                  <img class="product-image"
-                    src="src/Image/super-cute-boys-ski-suits-are-ready-hit-slopes-have-blast-winter-wonderland-generative-ai-min.jpg" />
-                  <div class="product-description">
-                    <h1 class="product-title">Leather Pushes</h1>
-                    <p>
-                      Order Leathar Leather Pushes for interior Designs for
-                      your cars
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
           </div>
         </div>
       </div>
@@ -334,45 +599,53 @@
       <div class="row">
         <div class="col-lg-12 col-md-12">
           <div class="section-title">
-            <h2>Register</h2>
+            <h2>Win a free copy of the game</h2>
           </div>
         </div>
       </div>
       <div class="row mt-4">
         <div class="col-lg-7 col-md-7 wow fadeInUp" data-wow-delay="0.2s">
           <div class="form-container-box">
-            <p>Signup for update on the development of the game and enter into a lucky draw to win a free copy of the
-              game.</p>
-            <form class="contact-form form" id="ajax-contact" method="post" action="/">
+            <p>Register for updates on the development of the game and a chance to win a free copy of the
+              game. For more information visit the <a href="#faq">FAQ</a> section on this page.</p>
+            <form class="contact-form form" id="registration-form" method="post" action="#">
               <div class="controls">
                 <div class="row mt-2">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Name*"
-                        required="required" data-error="Name is required." />
-                      <div class="help-block with-errors"></div>
+                      <input type="text" 
+                             class="form-control" 
+                             id="uname" 
+                             name="uname" 
+                             placeholder="Your full name.*"
+                             required="required"/>
+                        <div id="formFieldError_uname" class="help-block with-errors" style="color:#ff5722;margin-top:10px;padding-bottom: 5px;">Please type your full name.</div>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group mb-0">
-                      <input type="email" class="form-control" id="email" name="email" placeholder="Email*"
-                        required="required" data-error="Valid email is required." />
-                      <div class="help-block with-errors"></div>
+                      <input type="email" 
+                             class="form-control" 
+                             id="email" 
+                             name="email" 
+                             placeholder="Email address*"
+                             required="required"/>
+                             <div id="formFieldError_email" class="help-block with-errors" style="color:#ff5722;margin-top:10px;padding-bottom: 5px;">Please type a valid email address.</div>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="accept d-flex align-items-start mt-4">
-                      <input type="checkbox" class="me-2" name="age" id="age" required="">
-                      <label for="age">I am above 18 years of age</label>
+                      <input type="checkbox" class="me-2" name="age-declaration" id="age-declaration" checked="true" value="consented">
+                      <label for="age-declaration">I am above 18 years of age.</label>
                     </div>
                     <div class="accept d-flex align-items-start mt-2">
-                      <input type="checkbox" name="terms" class="me-2" id="terms" required="">
-                      <label for="terms">I agree to recieve news and promotional offers about this
-                        and other games created by SEAM Entertainment</label>
+                      <input type="checkbox" name="marketing-consent" class="me-2" id="marketing-consent" checked="true" value="consented">
+                      <label for="marketing-consent">I agree to recieve news and information about this
+                        and other products created or sold by SEAM Entertainment Limited.</label>
                     </div>
                   </div>
                   <div class="col-md-12">
-                    <button type="submit" class="button" data-text="Send Message">
+                    <button type="button" class="button" onClick="submitEnquiry();" >
                       Register
                     </button>
                   </div>
@@ -390,7 +663,7 @@
           </div>
         </div>
         <div class="col-lg-5 col-md-5 wow fadeInUp register-img" data-wow-delay="0.2s">
-          <img src="src/Image/4127298.jpg" style="transform: none; transition: none;" alt="">
+          <img src="./src/image/lucky_draw_600x400.png" style="transform: none; transition: none;" alt="">
         </div>
       </div>
     </div>
@@ -408,18 +681,13 @@
           <div class="card-header" id="headingOne">
             <h3 class="mb-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
               aria-controls="collapseOne">
-              01 When is the oficial launch?
+              What is a visual novel?
             </h3>
           </div>
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
               <p>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                A visual novel (VN) is a form of digital interactive fiction. They combine a textural narrative with illustrations and a degree of interactivity. A kinetic visual novel is a special type of visual novel that does not contain branching plots. This is similar to a conventional novel or a graphic novel.
               </p>
             </div>
           </div>
@@ -428,18 +696,13 @@
           <div class="card-header" id="headingTwo">
             <h3 class="mb-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
               aria-expanded="false" aria-controls="collapseTwo">
-              02 What will the mint price be?
+              When is this game likely to be released?
             </h3>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
             <div class="card-body">
               <p>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                The game is currently in development and is likely to be released around February 2024.
               </p>
             </div>
           </div>
@@ -448,18 +711,43 @@
           <div class="card-header" id="headingThree">
             <h3 class="mb-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
               aria-expanded="false" aria-controls="collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              03 How does the raffle work?
+              How can I get a free copy of this game?
             </h3>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
             <div class="card-body">
               <p>
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
-                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                If you use the registration form on this website, your details will be added into a lucky draw. Ten lucky participants will get a free copy of the game each , after it is released. Winners will be notified by email, therefore please ensure you provide an email account that you have access to.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFour">
+            <h3 class="mb-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+              aria-expanded="false" aria-controls="collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              What languages will the game be available in?
+            </h3>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+              <p>
+                The game will be avaiable to play in English, Spanish, Simplified chinese, and Japanese.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFive">
+            <h3 class="mb-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+              aria-expanded="false" aria-controls="collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              What platforms do you plan to support?
+            </h3>
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+            <div class="card-body">
+              <p>
+                The first release is likely to target Windows,  macOS , iOS, and Android release.
               </p>
             </div>
           </div>
@@ -478,9 +766,9 @@
         </div>
         <div class="footer-menu text-right">
           <ul>
-            <li><a href="page.html">Terms & Conditions</a></li>
-            <li><a href="page.html">Privacy Policy </a></li>
-            <li><a href="mailto:support@seamentertainment.com">Contact</a></li>
+            <li><a href="javascript:void(0)">Terms & Conditions</a></li>
+            <li><a href="./privacy.html">Privacy Policy </a></li>
+            <li><a href="mailto:support@seamentertainment.com">Contact Us</a></li>
           </ul>
         </div>
       </div>
@@ -495,14 +783,14 @@
   <!-- Back to Top End -->
 
   <!-- Site All Jquery Js -->
-  <script src="src/js/jquery-3.5.1.min.js"></script>
-  <script src="src/js/bootstrap.min.js"></script>
-  <script src="src/js/plugins.js"></script>
-  <script src="src/js/swiper.min.js"></script>
-  <script src="src/js/wow.min.js"></script>
-  <script src="src/js/validator.min.js"></script>
-  <script src="src/js/contact.js"></script>
-  <script src="src/js/main.js"></script>
+  <script src="./src/js/jquery-3.5.1.min.js"></script>
+  <script src="./src/js/bootstrap.min.js"></script>
+  <script src="./src/js/plugins.js"></script>
+  <script src="./src/js/swiper.min.js"></script>
+  <script src="./src/js/wow.min.js"></script>
+  <script src="./src/js/validator.min.js"></script>
+  <script src="./src/js/contact.js"></script>
+  <script src="./src/js/main.js"></script>
   <script src="https://kit.fontawesome.com/d348c554e6.js" crossorigin="anonymous"></script>
 </body>
 

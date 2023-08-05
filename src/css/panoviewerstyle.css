@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', Helvetica, sans-serif;
+    overflow: hidden;
+  }
+  * {
+    -webkit-touch-callout:none;
+    -webkit-text-size-adjust:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-user-select:none;
+  }
+  .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 20px;
+    pointer-events: none;
+  }
+  .hr {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    display: block;
+    background: #088c97;
+    vertical-align: middle;
+  }
+  p {
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    color: white;
+    font-size: 14px;
+  }
+  canvas, .grab {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+  }
+  canvas:active, .grabbing {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing; 
+  }
+  #drop-region {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    pointer-events: none;
+    border: 2px dashed white;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+    mix-blend-mode: overlay;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /**************************************
+ ** Preloader Area CSS
+ **************************************/
+.preloader {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 99999999;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+}
+
+.preloader .preloader-wapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner-loader {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.spinner-loader div {
+  position: absolute;
+  border: 4px solid #00ABB1;
+  opacity: 1;
+  border-radius: 0;
+  border-radius: 50%;
+}
+
+.spinner-loader div:nth-child(2) {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+  border-radius: 50%;
+}
+
+.spinner-logo {
+  width: 400px !important;
+}
+
+.spinner-border {
+  border: none !important;
+}
